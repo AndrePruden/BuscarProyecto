@@ -20,16 +20,38 @@ describe("Buscar Proyectos", () => {
     expect(buscarProyecto("proyecto2", proyectos)).toEqual("proyecto2");
   });
 
+  it("Buscar y encontrar mas de una coindencia de proyectos", () => {
+    let proyectos = [];
+    proyectos.push("proyecto1");
+    proyectos.push("proyecto2");
+    proyectos.push("proyecto3");
+    proyectos.push("proyecto2");
+    expect(buscarProyecto("proyecto2", proyectos)).toEqual(["proyecto2","proyecto2"]);
+  });
 
 });
 
 function buscarProyecto(nombreProyecto, proyectos){
+  let proyectosEncontrados = [];
+  let cantidad = 0;
   if(proyectos.length === 0){
     return "";
   }
   for(const proyecto of proyectos){
     if(proyecto === nombreProyecto){
-      return proyecto
+      proyectosEncontrados.push(proyecto);
+      cantidad += 1;
     }
   }
+
+  if(cantidad > 1){
+    return proyectosEncontrados;
+  }
+  if(cantidad === 1){
+    return proyectosEncontrados[0];
+  }
+  else{
+    return "";
+  }
+
 }
