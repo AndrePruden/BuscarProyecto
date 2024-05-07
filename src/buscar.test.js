@@ -12,6 +12,14 @@ describe("Buscar Proyectos", () => {
     expect(buscarProyecto("miUnicoProyecto", proyectos)).toEqual("miUnicoProyecto");
   });
 
+  it("Encuentra un proyecto cuando el mismo existe en una lista de varios proyecto", () => {
+    let proyectos = [];
+    proyectos.push("proyecto1");
+    proyectos.push("proyecto2");
+    proyectos.push("proyecto3");
+    expect(buscarProyecto("proyecto2", proyectos)).toEqual("proyecto2");
+  });
+
 
 });
 
@@ -19,7 +27,9 @@ function buscarProyecto(nombreProyecto, proyectos){
   if(proyectos.length === 0){
     return "";
   }
-  if(proyectos[0] === nombreProyecto){
-    return nombreProyecto;
+  for(const proyecto of proyectos){
+    if(proyecto === nombreProyecto){
+      return proyecto
+    }
   }
 }
